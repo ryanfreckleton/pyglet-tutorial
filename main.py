@@ -4,27 +4,25 @@ import pyglet
 
 from pyglet.window import key
 
-class Player:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+pyglet.resource.path = ['resources/']
+pyglet.resource.reindex()
 
 window = pyglet.window.Window(800, 600)
-player = Player(window.width//2, window.height//2)
-label = pyglet.text.Label("Player", x=player.x, y=player.y)
+ship_img = pyglet.resource.image('ship.png')
+player_ship = pyglet.sprite.Sprite(img=ship_img, x=400, y=300)
 
 @window.event
 def on_draw():
     window.clear()
-    label.draw()
+    player_ship.draw()
 
 @window.event
 def on_key_press(symbol, modifiers):
-    global label
-    if   symbol == key.W: label.y += 10
-    elif symbol == key.A: label.x += -10
-    elif symbol == key.S: label.y += -10
-    elif symbol == key.D: label.x += 10
+    global player_ship
+    if   symbol == key.W: player_ship.y += 10
+    elif symbol == key.A: player_ship.x += -10
+    elif symbol == key.S: player_ship.y += -10
+    elif symbol == key.D: player_ship.x += 10
 
 
 if __name__== '__main__':
